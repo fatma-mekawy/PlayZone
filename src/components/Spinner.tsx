@@ -1,7 +1,5 @@
-import React from 'react'
-
 export default function Spinner() {
   return (
-    <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-[#237cbd]"></div>
-  )
+    <div className="w-10 h-10 rounded-full border-2 border-[#D6E2F0] border-t-[#1E56A0] animate-spin" />
+  );
 }

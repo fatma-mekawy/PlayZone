@@ -1,22 +1,73 @@
-import React from 'react'
+import React from "react";
+import Link from "next/link";
+import { CalendarCheck, Dumbbell, ArrowRight, CheckCircle } from "lucide-react";
 
-//META DATA
 export const metadata = {
-  title: "Services",
-  description: "Discover the range of services offered by PlayZone, including court booking, event organization, and personalized support to enhance your sports experience."
+  title: "Services | PlayZone",
+  description:
+    "Discover the range of services offered by PlayZone, including court booking and training sessions.",
 };
 
-export default function services() {
+const services = [
+  {
+    href: "/services/booking",
+    label: "Court Booking",
+    description:
+      "Easily book football, padel, basketball, and tennis courts with flexible schedules and affordable hourly prices.",
+    Icon: CalendarCheck,
+    color: "from-[#1E56A0] to-[#3B82F6]",
+    features: ["Instant confirmation", "Flexible hours", "Multiple sports"],
+  },
+  {
+    href: "/services/training",
+    label: "Training Sessions",
+    description:
+      "Join professional training sessions with experienced coaches to improve your skills and fitness performance.",
+    Icon: Dumbbell,
+    color: "from-[#059669] to-[#34D399]",
+    features: ["Expert coaches", "All skill levels", "Group & solo sessions"],
+  },
+];
+
+export default function ServicesPage() {
   return (
-    <section className='p-8 bg-[#1F2A3B] text-white rounded w-3/4 m-auto overflow-hidden shadow-lg'>
-  <h1 className='text-2xl font-bold mb-4 text-[#237cbd]'>Our Services</h1>
-  <p className='mb-6 text-lg'>
-    Explore our sports services and choose the experience that fits your needs.
-  </p>
-    <a href="/services/booking" className='block mb-4 p-4 bg-[#237cbd] rounded text-center text-white font-semibold hover:bg-[#1a5e8a] transition-colors duration-300'>
-      Court Booking</a>
-      <a href="/services/training" className='block mb-4 p-4 bg-[#237cbd] rounded text-center text-white font-semibold hover:bg-[#1a5e8a] transition-colors duration-300'>
-      Training Sessions</a>
-</section>
-  )
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      {services.map(({ href, label, description, Icon, color, features }) => (
+        <Link
+          key={href}
+          href={href}
+          className="group bg-white rounded-2xl border border-[#D6E2F0] shadow-sm hover:shadow-md hover:border-[#1E56A0]/30 transition-all duration-300 overflow-hidden"
+        >
+          {/* Card header gradient */}
+          <div className={`bg-gradient-to-br ${color} p-6`}>
+            <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mb-3">
+              <Icon size={24} className="text-white" />
+            </div>
+            <h2 className="text-xl font-bold text-white">{label}</h2>
+          </div>
+
+          {/* Card body */}
+          <div className="p-6">
+            <p className="text-[#64748B] text-sm leading-relaxed mb-5">
+              {description}
+            </p>
+            <ul className="flex flex-col gap-2 mb-5">
+              {features.map((f) => (
+                <li
+                  key={f}
+                  className="flex items-center gap-2 text-sm text-[#1A2540]"
+                >
+                  <CheckCircle size={14} className="text-[#22C55E] shrink-0" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <div className="flex items-center gap-2 text-[#1E56A0] text-sm font-semibold group-hover:gap-3 transition-all">
+              Learn more <ArrowRight size={15} />
+            </div>
+          </div>
+        </Link>
+      ))}
+    </div>
+  );
 }
